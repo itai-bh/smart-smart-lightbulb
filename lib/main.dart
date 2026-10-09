@@ -72,7 +72,7 @@ class LightCard extends StatefulWidget {
 
 class _LightCardState extends State<LightCard> {
   bool _isExpanded = false;
-  double _brightness = 0.0;
+  double brightness = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -126,20 +126,26 @@ class _LightCardState extends State<LightCard> {
             ],
           ),
           if (_isExpanded)
-            const Row(
+            Column(
               children: [
-                Column(
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            "Brightness: ",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ],
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "Brightness: ",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Slider(
+                      value: brightness,
+                      onChanged: (value) {
+                        setState(() {
+                          brightness = value;
+                        });
+                      },
+                      thumbColor: Colors.white,
+                      activeColor: Colors.grey,
                     ),
                   ],
                 ),
