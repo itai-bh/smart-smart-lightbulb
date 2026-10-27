@@ -36,15 +36,17 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           children: [
-            LightCard(
-              title: "Bedroom Light",
-              isOn: lighton,
-              onToggle: (bool newval) {
-                setState(() {
-                  lighton = newval;
-                });
-              },
-            ),
+            lightexists
+                ? LightCard(
+                    title: "Bedroom Light",
+                    isOn: lighton,
+                    onToggle: (bool newval) {
+                      setState(() {
+                        lighton = newval;
+                      });
+                    },
+                  )
+                : CreateBulb(),
           ],
         ),
       ),
@@ -145,13 +147,84 @@ class _LightCardState extends State<LightCard> {
                         });
                       },
                       thumbColor: Colors.white,
-                      activeColor: Colors.grey,
+                      activeColor: Colors.amber,
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "Other Settings: ",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: null,
+                      icon: const Icon(
+                        Icons.settings,
+                        color: Colors.white,
+                        size: 20,
+                      ),
                     ),
                   ],
                 ),
               ],
             ),
         ],
+      ),
+    );
+  }
+}
+
+class CreateBulb extends StatelessWidget {
+  const CreateBulb({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            "Create a Lightbulb",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+        ),
+        IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const MakeBulb()),
+            );
+          },
+          icon: Icon(Icons.add, color: Colors.white, size: 30),
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all<Color>(Colors.grey),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class MakeBulb extends StatefulWidget {
+  const MakeBulb({super.key});
+
+  @override
+  State<MakeBulb> createState() => _MakeBulbState();
+}
+
+class _MakeBulbState extends State<MakeBulb> {
+  final _formKey = GlobalKey<_MakeBulbState>();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Create a Lightbulb")),
+      body: Center(
+        child: Form(key: _formKey, child: Column()),
       ),
     );
   }
