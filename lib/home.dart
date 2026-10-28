@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'create_bulb.dart';
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -206,26 +208,6 @@ class CreateBulb extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class MakeBulb extends StatefulWidget {
-  const MakeBulb({super.key});
-
-  @override
-  State<MakeBulb> createState() => _MakeBulbState();
-}
-
-class _MakeBulbState extends State<MakeBulb> {
-  final _formKey = GlobalKey<_MakeBulbState>();
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Create a Lightbulb")),
-      body: Center(
-        child: Form(key: _formKey, child: Column()),
-      ),
     );
   }
 }
