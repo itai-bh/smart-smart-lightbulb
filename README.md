@@ -1,17 +1,7 @@
 # smart_smart_lightbulbs
 
-A new Flutter project.
+Flutter app smart lightbulb controller, current WIP.
+Planned scope is any lightbulb controlled by unencrypted json payloads on UDP packets.
+End goal of listing app on FDroid, so fully FOSS no telemetry etc.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Project is also my first time using flutter so I'm learning as I go, so no vibecoding since that would be counterintuitive. Also using for my Silver DofE skills. 
