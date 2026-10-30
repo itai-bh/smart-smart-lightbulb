@@ -8,8 +8,9 @@ class MakeBulb extends StatefulWidget {
 }
 
 class _MakeBulbState extends State<MakeBulb> {
-  final _formKey = GlobalKey<_MakeBulbState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool definedIP = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +29,58 @@ class _MakeBulbState extends State<MakeBulb> {
                   ),
                   validator: (value) => value!.isEmpty ? 'Required' : null,
                 ),
-                RadioListTile<bool>(
-                  title: Text('Use Predefined IP'),
-                  value: true,
+                RadioGroup<bool>(
+                  onChanged: (bool? value) {
+                    setState(() {
+                      definedIP = value ?? false;
+                    });
+                  },
+                  groupValue: definedIP,
+                  child: Column(
+                    children: [
+                      RadioListTile<bool>(
+                        title: Text('Use Predefined IP'),
+                        subtitle: Text(
+                          "If you already know the lightbulb's IP",
+                        ),
+                        value: true,
+                      ),
+                      RadioListTile<bool>(
+                        title: Text('Use Limited Brodcast Address'),
+                        subtitle: Text("If you don't know the lightbulb's IP"),
+                        value: false,
+                      ),
+                    ],
+                  ),
+                ),
+                if (definedIP == true)
+                  TextFormField(
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.dns),
+                      labelText: "Lightbulb IP",
+                      hintText: "255.255.255.255",
+                    ),
+                    maxLength: 15,
+                  ),
+
+                TextFormField(
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.settings_ethernet),
+                    labelText: "Port",
+                  ),
+                  maxLength: 5,
+                  validator: (value) => value!.isEmpty ? "Required" : null,
+                ),
+
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Submitted")),
+                      );
+                    }
+                  },
+                  child: const Text("Create Lightbulb"),
                 ),
               ],
             ),
